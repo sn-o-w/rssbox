@@ -607,7 +607,7 @@ get %r{/instagram/(?<user_id>\d+)/(?<username>.+)} do |user_id, username|
   @user_id = user_id
   @user = CGI.unescape(username)
 
-  data, @updated_at = App::Cache.cache("instagram.posts", user_id, 4*60*60, 60*60) do
+  data, @updated_at = App::Cache.cache("instagram.posts", user_id, 30*60, 30*60) do
     # To find the query_hash, simply use the Instagram website and monitor the network calls.
     # This request in particular is the one that gets the next page when you scroll down on a profile, but we change it to get the first 12 posts instead of the second or third page.
     response = App::Instagram.get("/graphql/query/", {
